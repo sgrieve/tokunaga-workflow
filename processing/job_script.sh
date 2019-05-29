@@ -1,6 +1,8 @@
 #!/bin/bash
 #$ -cwd
 #$ -j y
+#$ -N tokunaga
+#$ -o /data/Geog-c2s2/toku/
 #$ -pe smp 1
 #$ -l node_type=sm
 #$ -l h_vmem=128G
