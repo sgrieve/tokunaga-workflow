@@ -8,6 +8,7 @@ import numpy as np
 import math
 import json
 from glob import glob
+import logging
 
 def alpha_shape(points, alpha):
     """
@@ -74,9 +75,14 @@ precips = {}
 
 file_list = glob('/data/Geog-c2s2/toku/*_*/toku_network_*.csv')
 
+
+logging.basicConfig(filename='/data/home/faw513/tokunaga-workflow/log.log', level=logging.INFO)
+
+logging.info('entering loop')
+
 for i, filename in enumerate(file_list):
 
-    print(i, len(file_list))
+    logging.info('File {} of {}'.format(i + 1, len(file_list)))
 
     points = []
 
@@ -94,5 +100,7 @@ for i, filename in enumerate(file_list):
 
     precips[toku_id] = stats[0]['mean']
 
-    with open('data.json', 'w') as outfile:
-        json.dump(precips, outfile)
+
+logging.info('writing json')
+with open('/data/Geog-c2s2/toku/toku-data.json', 'w') as outfile:
+    json.dump(precips, outfile)
