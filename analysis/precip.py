@@ -85,7 +85,7 @@ for filename in glob('/data/Geog-c2s2/toku/*_*/toku_network_*.csv'):
 
     concave_hull, edge_points = alpha_shape(MultiPoint(points), alpha=10.5)
 
-    stats = zonal_stats(concave_hull, 'data/CHELSA_bio10_12.tif', stats="mean")
+    stats = zonal_stats(concave_hull, '/data/Geog-c2s2/CHELSA_bio10_12.tif', stats="mean")
 
     toku_id = filename.split('toku_network_')[1][:-4]
 
