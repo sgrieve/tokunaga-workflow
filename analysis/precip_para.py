@@ -80,10 +80,10 @@ points = []
 with open(filename) as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
     next(reader)
-    for row in reader[::25]:
+    for row in reader:
         points.append(Point(float(row[1]), float(row[0])))
 
-concave_hull, _ = alpha_shape(MultiPoint(points), alpha=10.5)
+concave_hull, _ = alpha_shape(MultiPoint(points[::25]), alpha=10.5)
 
 stats = zonal_stats(concave_hull, '/data/Geog-c2s2/CHELSA_bio10_12.tif', stats="mean")
 
