@@ -72,8 +72,11 @@ def alpha_shape(points, alpha):
 
 precips = {}
 
+file_list = glob('/data/Geog-c2s2/toku/*_*/toku_network_*.csv')
 
-for filename in glob('/data/Geog-c2s2/toku/*_*/toku_network_*.csv'):
+for i, filename in enumerate(file_list):
+
+    print(i, len(file_list))
 
     points = []
 
