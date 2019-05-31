@@ -23,4 +23,4 @@ paramfile=/data/home/faw513/tokunaga-workflow/files.txt
 index=`sed -n ${number}p $paramfile | awk '{print $1}'`
 variable1=`sed -n ${number}p $paramfile | awk '{print $2}'`
 
-python /data/home/faw513/tokunaga-workflow/analysis/precip.py $variable1
+python /data/home/faw513/tokunaga-workflow/analysis/precip_para.py $variable1
