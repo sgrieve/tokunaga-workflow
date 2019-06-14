@@ -96,3 +96,37 @@ def fit_a_and_c(toku, strahler):
     r_squared = 1 - (ss_res / ss_tot)
 
     return r_squared, popt[0], popt[1]
+
+def fit_a_and_c_x_y(toku, strahler):
+
+    x = []
+    y = []
+    omega = max(strahler)
+
+    for k in range(1, omega + 1):
+        for i in range(1, omega + 1):
+            if ((i + k) <= omega) and ((i + k) >= 2):
+
+                tk = T_k(i, k, toku)
+                x.append(k)
+                y.append(tk)
+
+    weights = [z_k(k, omega, toku) for k in x]
+
+    weights = np.sqrt(weights)
+    norm_weights = []
+
+    for w in weights:
+        W = (w - np.min(weights)) / (np.max(weights) - np.min(weights))
+        norm_weights.append((1 - W) + 0.01)
+
+    p0 = 1.26, 2.4
+
+    popt, pcov = curve_fit(f, x, y, p0, sigma=norm_weights, absolute_sigma=False)
+
+    residuals = np.array(y) - f(np.array(x), popt[0], popt[1])
+    ss_res = np.sum(residuals**2)
+    ss_tot = np.sum((y - np.mean(y))**2)
+    r_squared = 1 - (ss_res / ss_tot)
+
+    return r_squared, popt[0], popt[1], x, y
