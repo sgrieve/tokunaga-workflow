@@ -41,6 +41,11 @@ def z_k(k, omega, data):
 def f(k, a, c):
     return a * np.power(c, k - 1)
 
+def horton_Rb(data, r):
+    return horton_Nr(data, r)/horton_Nr(data, r + 1)
+
+def horton_Nr(data, r):
+    return data.count(r)
 
 arid = glob('/Users/stuart/toku_data/hpc/TokunagaData_[4-7]_*.csv')
 tropical = glob('/Users/stuart/toku_data/hpc/TokunagaData_[1-3]_*.csv')
@@ -53,13 +58,16 @@ cold += glob('/Users/stuart/toku_data/hpc/TokunagaData_25_*.csv')
 
 labels = ['Arid', 'Tropical', 'Temperate', 'Cold']
 
+delta = []
+total_count = 0
+reject_count = 0
 for q, files in enumerate([arid, tropical, temperate, cold]):
 
     As = []
     Cs = []
 
-    reject_count = 0
-    total_count = 0
+
+
     for i, filename in enumerate(files):
         # print(i, 'of', len(files))
 
@@ -124,13 +132,32 @@ for q, files in enumerate([arid, tropical, temperate, cold]):
         r_squared = 1 - (ss_res / ss_tot)
 
         # print('Weighted fit parameters:', popt, 'R squared:', r_squared)
-        if r_squared >= 0.8:
-            As.append(popt[0])
+        frac = 0.8
+        if r_squared >= frac:
+
+            # a = popt[0]
+            # c = popt[1]
+            # rb_real = horton_Rb(strahler, omega - 2)
+            # rb_test = ((2+c+a) + np.sqrt((2+c+a) * (2+c+a) - (8*c)))/2
+            # # plt.plot(rb_real, rb_test, 'k.')
+            #
+            # if abs(rb_real - rb_test) < 0.5:
+
             Cs.append(popt[1])
+            # else:
+            #     reject_count += 1
+
         else:
             reject_count += 1
+            As.append(popt[1])
 
         total_count += 1
+
+# plt.plot((0, 8),(0, 8), 'r--')
+# plt.xlim(0, 8)
+# plt.ylim(0, 8)
+# plt.hist(delta, bins=30)
+# plt.show()
 
             # plt.ylim(0.1, 10000)
             # plt.xlim(0,11)
@@ -141,22 +168,34 @@ for q, files in enumerate([arid, tropical, temperate, cold]):
             # plt.clf()
 
 
-    # plt.ylim(1.5, 5)
-    # plt.xlim(0.6, 1.8)
-    # plt.plot(As, Cs, 'k.')
-    print(np.mean(As), np.mean(Cs), len(Cs))
-
-    avg = round(np.mean(Cs), 2)
-    std = round(np.std(Cs), 2)
-
-    print(labels[q], reject_count/total_count)
-
-    sns.distplot(Cs, hist=False, kde=True,
-                 kde_kws={'linewidth': 3, 'shade': True}, label='{} c: {} std: {}'.format(labels[q], avg, std))
 
 
-# plt.hist(Cs, bins=50)
-plt.xlim(0,6)
 
-plt.savefig('full_data_kde.png')
-plt.clf()
+#
+#     # plt.ylim(1.5, 5)
+#     # plt.xlim(0.6, 1.8)
+#     # plt.plot(As, Cs, 'k.')
+#     print(np.mean(As), np.mean(Cs), len(Cs))
+#
+#     avg = round(np.mean(As), 2)
+#     std = round(np.std(As), 2)
+#
+#     # print(labels[q], reject_count/total_count)
+#
+#     sns.distplot(As, hist=False, kde=True,
+#              kde_kws={'linewidth': 3, 'shade': True}, label='{} c: {} std: {} n: {}'.format('NotTSS', avg, std, len(As)))
+#
+#
+#     avg = round(np.mean(Cs), 2)
+#     std = round(np.std(Cs), 2)
+#
+#     sns.distplot(Cs, hist=False, kde=True,
+#                  kde_kws={'linewidth': 3, 'shade': True}, label='{} c: {} std: {} n: {}'.format('TSS', avg, std, len(Cs)))
+#
+#
+# # plt.hist(Cs, bins=50)
+# plt.xlim(0,6)
+#
+# plt.savefig('full_data_kde_tss_arid_{}.png'.format(frac))
+# plt.clf()
+print(total_count, reject_count)

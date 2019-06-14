@@ -48,6 +48,15 @@ Cs_lo = []
 As_hi = []
 Cs_hi = []
 
+As_1 = []
+Cs_1 = []
+As_2 = []
+Cs_2 = []
+As_3 = []
+Cs_3 = []
+As_4 = []
+Cs_4 = []
+
 with open('/Users/stuart/tokunaga-workflow/analysis/merged_precip.json') as js:
     precip_data = json.load(js)
 
@@ -123,12 +132,18 @@ for i, filename in enumerate(file_list):
 
     # print('Weighted fit parameters:', popt, 'R squared:', r_squared)
     if r_squared >= 0.8:
-        if precip_data[toku_id] < 1600:
-            As_lo.append(popt[0])
-            Cs_lo.append(popt[1])
+        if precip_data[toku_id] < 271:
+            As_1.append(popt[0])
+            Cs_1.append(popt[1])
+        elif precip_data[toku_id] < 631:
+            As_2.append(popt[0])
+            Cs_2.append(popt[1])
+        elif precip_data[toku_id] < 1230:
+            As_3.append(popt[0])
+            Cs_3.append(popt[1])
         else:
-            As_hi.append(popt[0])
-            Cs_hi.append(popt[1])
+            As_4.append(popt[0])
+            Cs_4.append(popt[1])
 
         # 5938.8516083170425 is the max precip in the dataset
         # marker_size = ((precip_data[toku_id] / 5938.8516083170425) * 150) + 1
@@ -147,18 +162,23 @@ for i, filename in enumerate(file_list):
 # plt.xlim(0.6, 1.8)
 
 
-sns.distplot(Cs_lo, hist=False, kde=True,
-             kde_kws={'linewidth': 3, 'shade': True}, label='low')
+sns.distplot(Cs_1, hist=False, kde=True,
+             kde_kws={'linewidth': 3, 'shade': True}, label='1')
 
-sns.distplot(Cs_hi, hist=False, kde=True,
-             kde_kws={'linewidth': 3, 'shade': True}, label='high')
+sns.distplot(Cs_2, hist=False, kde=True,
+             kde_kws={'linewidth': 3, 'shade': True}, label='2')
 
+sns.distplot(Cs_3, hist=False, kde=True,
+             kde_kws={'linewidth': 3, 'shade': True}, label='3')
+
+sns.distplot(Cs_4, hist=False, kde=True,
+             kde_kws={'linewidth': 3, 'shade': True}, label='4')
 
 plt.xlim(0,6)
 
-
-print('high', np.mean(As_hi), np.mean(Cs_hi), len(Cs_hi))
-print('low', np.mean(As_lo), np.mean(Cs_lo), len(Cs_lo))
+# 
+# print('high', np.mean(As_hi), np.mean(Cs_hi), len(Cs_hi))
+# print('low', np.mean(As_lo), np.mean(Cs_lo), len(Cs_lo))
 
 plt.savefig('precip_data.png')
 plt.clf()
