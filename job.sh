@@ -7,7 +7,7 @@
 #$ -l node_type=dn
 #$ -l h_vmem=2G
 #$ -l h_rt=0:30:0
-#$ -t 1-5293
+#$ -t 1-4506
 #$ -tc 100
 
 module load python/3.6.3
