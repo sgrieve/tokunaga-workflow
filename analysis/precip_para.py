@@ -92,3 +92,5 @@ precips[toku_id] = stats[0]['mean']
 
 with open('/data/Geog-c2s2/toku/toku-data-{}.json'.format(toku_id), 'w') as outfile:
     json.dump(precips, outfile)
+
+print('Success')
