@@ -6,14 +6,14 @@ from glob import glob
 
 # Load our data, into lists of filenames catgorized by climate zone
 
-arid = glob('/Users/stuart/toku_data/hpc/TokunagaData_[4-7]_*.csv')
-tropical = glob('/Users/stuart/toku_data/hpc/TokunagaData_[1-3]_*.csv')
-temperate = glob('/Users/stuart/toku_data/hpc/TokunagaData_8_*.csv')
-temperate += glob('/Users/stuart/toku_data/hpc/TokunagaData_11_*.csv')
-temperate += glob('/Users/stuart/toku_data/hpc/TokunagaData_14_*.csv')
-cold = glob('/Users/stuart/toku_data/hpc/TokunagaData_17_*.csv')
-cold += glob('/Users/stuart/toku_data/hpc/TokunagaData_21_*.csv')
-cold += glob('/Users/stuart/toku_data/hpc/TokunagaData_25_*.csv')
+arid = glob('../data/TokunagaData_[4-7]_*.csv')
+tropical = glob('../data/TokunagaData_[1-3]_*.csv')
+temperate = glob('../data/TokunagaData_8_*.csv')
+temperate += glob('../data/TokunagaData_11_*.csv')
+temperate += glob('../data/TokunagaData_14_*.csv')
+cold = glob('../data/TokunagaData_17_*.csv')
+cold += glob('../data/TokunagaData_21_*.csv')
+cold += glob('../data/TokunagaData_25_*.csv')
 
 labels = ['Arid', 'Tropical', 'Temperate', 'Cold']
 colours = ['r', 'g', 'k', 'b']

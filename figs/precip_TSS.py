@@ -4,10 +4,10 @@ import tokunaga_fns as toku
 from glob import glob
 import seaborn as sns
 
-with open('/Users/stuart/tokunaga-workflow/analysis/merged_precip.json') as js:
+with open('../data/merged_precip.json') as js:
     precip_data = json.load(js)
 
-file_list = glob('/Users/stuart/toku_data/hpc/TokunagaData_*_*.csv')
+file_list = glob('../data/TokunagaData_*_*.csv')
 
 precip_Ntss = []
 precip_tss = []
