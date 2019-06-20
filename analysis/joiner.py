@@ -1,7 +1,7 @@
 import json
 from glob import glob
 
-files = glob('jsons/*.json')
+files = glob('../jsons/*.json')
 
 joined_data = {}
 
