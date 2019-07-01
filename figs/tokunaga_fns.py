@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.optimize import curve_fit
+from sklearn.linear_model import LinearRegression
 
 
 def N_i_j(i, j, data):
@@ -76,7 +77,7 @@ def read_toku_data(filename):
         toku.append(int(s[1]))
         lengths.append(float(s[2]))
 
-    return toku, strahler
+    return toku, strahler, lengths
 
 
 def fit_a_and_c(toku, strahler):
@@ -146,3 +147,33 @@ def fit_a_and_c_x_y(toku, strahler):
     r_squared = 1 - (ss_res / ss_tot)
 
     return r_squared, popt[0], popt[1], x, y
+
+
+def calc_Rb(strahler):
+
+    omega = max(strahler)
+
+    Rbs = np.zeros(omega - 1)
+
+    for a, q in enumerate(range(1, omega)):
+        Rbs[a] = horton_Rb(strahler, q)
+
+    std = np.std(Rbs)
+    avg = np.mean(Rbs)
+
+    return avg, std
+
+
+def calc_Rr(strahler, lengths):
+
+    omega = max(strahler)
+
+    Rbs = np.zeros(omega - 1)
+
+    for a, q in enumerate(range(1, omega)):
+        Rbs[a] = horton_Rr(strahler, lengths, q)
+
+    std = np.std(Rbs)
+    avg = np.mean(Rbs)
+
+    return avg, std
