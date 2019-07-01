@@ -45,6 +45,20 @@ def horton_Rb(data, r):
 def horton_Nr(data, r):
     return data.count(r)
 
+def horton_ri(strahler_data, length_data, r):
+    lengths = []
+
+    for s, l in zip(strahler_data, length_data):
+        if s == r:
+            lengths.append(l)
+
+    return np.mean(lengths)
+
+def horton_Rr(strahler_data, length_data, r):
+    return horton_ri(strahler_data, length_data, r + 1) / horton_ri(strahler_data, length_data, r)
+
+def D(Rb, Rr):
+    return np.log(Rb) / np.log(Rr)
 
 def read_toku_data(filename):
 
@@ -54,11 +68,13 @@ def read_toku_data(filename):
 
     toku = []
     strahler = []
+    lengths = []
 
     for d in data:
         s = d.split(',')
         strahler.append(int(s[0]))
         toku.append(int(s[1]))
+        lengths.append(float(s[2]))
 
     return toku, strahler
 

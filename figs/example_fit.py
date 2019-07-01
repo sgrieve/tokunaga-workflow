@@ -6,7 +6,7 @@ from glob import glob
 
 filename = '../data/TokunagaData_25_44_45dab36e_67d9_4ba0_a243_a73ed6b6ed11_0.csv'
 
-toku_data, strahler_data = toku.read_toku_data(filename)
+toku_data, strahler_data, _ = toku.read_toku_data(filename)
 
 r_sq, a, c, x, y = toku.fit_a_and_c_x_y(toku_data, strahler_data)
 

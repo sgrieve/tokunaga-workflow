@@ -23,7 +23,7 @@ for i, data in enumerate([arid, tropical, temperate, cold]):
     As = []
     for filename in data:
 
-        toku_data, strahler_data = toku.read_toku_data(filename)
+        toku_data, strahler_data, _ = toku.read_toku_data(filename)
 
         r_sq, a, c = toku.fit_a_and_c(toku_data, strahler_data)
         threshold = 0.9
