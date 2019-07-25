@@ -3,6 +3,7 @@ import seaborn as sns
 import tokunaga_fns as toku
 import numpy as np
 from glob import glob
+import sys
 
 # Load our data, into lists of filenames catgorized by climate zone
 
@@ -26,7 +27,7 @@ for i, data in enumerate([arid, tropical, temperate, cold]):
         toku_data, strahler_data, _ = toku.read_toku_data(filename)
 
         r_sq, a, c = toku.fit_a_and_c(toku_data, strahler_data)
-        threshold = 0.9
+        threshold = float(sys.argv[1])
         if r_sq > threshold:
             Cs.append(c)
             As.append(a)
@@ -39,4 +40,4 @@ plt.ylim(0, 7)
 plt.ylabel('c')
 plt.xlabel('a')
 plt.legend()
-plt.savefig('koppen_{}_a_c.png'.format(threshold))
+plt.savefig('koppen_{}_a_c.png'.format(str(threshold).replace('.', '')))

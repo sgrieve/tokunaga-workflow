@@ -3,6 +3,7 @@ import json
 import tokunaga_fns as toku
 from glob import glob
 import seaborn as sns
+import sys
 
 with open('../data/merged_precip.json') as js:
     precip_data = json.load(js)
@@ -21,7 +22,7 @@ for filename in file_list:
     toku_data, strahler_data, _ = toku.read_toku_data(filename)
 
     r_sq, a, c = toku.fit_a_and_c(toku_data, strahler_data)
-    threshold = 0.9
+    threshold = float(sys.argv[1])
     if r_sq > threshold:
         precip_tss.append(precip_data[toku_id])
     else:
@@ -35,4 +36,4 @@ ax.set_xticklabels(['Self-similar', 'Not\nself-similar'])
 
 plt.ylabel('Mean annual precipitation ($mm yr^{-1}$)')
 
-plt.savefig('precip_tss_{}.png'.format(threshold))
+plt.savefig('precip_tss_{}.png'.format(str(threshold).replace('.', '')))
