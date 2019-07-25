@@ -18,6 +18,8 @@ cold += glob('../data/TokunagaData_25_*.csv')
 
 labels = ['Arid', 'Tropical', 'Temperate', 'Cold']
 
+threshold = float(sys.argv[1])
+
 for i, data in enumerate([arid, tropical, temperate, cold]):
     Cs = []
     for filename in data:
@@ -25,7 +27,7 @@ for i, data in enumerate([arid, tropical, temperate, cold]):
         toku_data, strahler_data, _ = toku.read_toku_data(filename)
 
         r_sq, a, c = toku.fit_a_and_c(toku_data, strahler_data)
-        threshold = float(sys.argv[1])
+
         if r_sq > threshold:
             Cs.append(c)
 

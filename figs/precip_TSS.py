@@ -10,6 +10,8 @@ with open('../data/merged_precip.json') as js:
 
 file_list = glob('../data/TokunagaData_*_*.csv')
 
+threshold = float(sys.argv[1])
+
 precip_Ntss = []
 precip_tss = []
 for filename in file_list:
@@ -22,7 +24,6 @@ for filename in file_list:
     toku_data, strahler_data, _ = toku.read_toku_data(filename)
 
     r_sq, a, c = toku.fit_a_and_c(toku_data, strahler_data)
-    threshold = float(sys.argv[1])
     if r_sq > threshold:
         precip_tss.append(precip_data[toku_id])
     else:
