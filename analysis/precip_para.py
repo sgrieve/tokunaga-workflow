@@ -76,7 +76,6 @@ def alpha_shape(points, alpha):
 precips = {}
 
 filename = sys.argv[1]
-
 points = []
 
 with open(filename) as csvfile:
@@ -86,7 +85,6 @@ with open(filename) as csvfile:
         points.append(Point(float(row[1]), float(row[0])))
 
 concave_hull, _ = alpha_shape(MultiPoint(points[::25]), alpha=10.5)
-
 stats = zonal_stats(concave_hull, '/data/Geog-c2s2/CHELSA_bio10_12.tif', stats="mean")
 
 toku_id = filename.split('toku_network_')[1][:-4]

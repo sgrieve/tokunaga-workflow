@@ -1,12 +1,12 @@
 #!/bin/bash
 #$ -cwd
 #$ -j y
-#$ -N toku-figs
+#$ -N fig-toku
 #$ -o /data/Geog-c2s2/toku/
 #$ -pe smp 1
 #$ -l node_type=dn
 #$ -l h_vmem=10G
-#$ -l h_rt=2:30:0
+#$ -l h_rt=24:00:0
 
 module load python/3.6.3
 module load gdal/2.3.1
