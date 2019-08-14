@@ -12,6 +12,6 @@ module load python/3.6.3
 module load gdal/2.3.1
 module load proj/5.2.0
 
-source /data/home/faw513/toku-env/bin/activate
+source /data/home/faw513/toku-fig-env/bin/activate
 
 python /data/home/faw513/tokunaga-workflow/analysis/a_c_dict.py
