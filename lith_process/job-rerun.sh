@@ -18,7 +18,7 @@ source /data/home/faw513/toku-env/bin/activate
 
 # Parse parameter file to get variables.
 number=$SGE_TASK_ID
-paramfile=/data/home/faw513/tokunaga-workflow/rerun_files_big.txt
+paramfile=/data/home/faw513/tokunaga-workflow/lith_process/rerun_files_big.txt
 
 index=`sed -n ${number}p $paramfile | awk '{print $1}'`
 variable1=`sed -n ${number}p $paramfile | awk '{print $2}'`
