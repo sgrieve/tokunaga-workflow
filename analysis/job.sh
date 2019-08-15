@@ -24,4 +24,4 @@ index=`sed -n ${number}p $paramfile | awk '{print $1}'`
 variable1=`sed -n ${number}p $paramfile | awk '{print $2}'`
 variable2=`sed -n ${number}p $paramfile | awk '{print $3}'`
 
-python /data/home/faw513/tokunaga-workflow/analysis/a_c_dict.py variable1 variable2
+python /data/home/faw513/tokunaga-workflow/analysis/a_c_dict.py $variable1 $variable2
