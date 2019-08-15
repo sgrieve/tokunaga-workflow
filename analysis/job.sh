@@ -6,7 +6,7 @@
 #$ -pe smp 1
 #$ -l node_type=dn
 #$ -l h_vmem=2G
-#$ -l h_rt=4:00:0
+#$ -l h_rt=0:10:0
 
 module load python/3.6.3
 module load gdal/2.3.1
