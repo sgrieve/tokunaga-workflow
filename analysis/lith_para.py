@@ -85,7 +85,8 @@ with open(filename) as csvfile:
         points.append(Point(float(row[1]), float(row[0])))
 
 concave_hull, _ = alpha_shape(MultiPoint(points[::25]), alpha=10.5)
-stats = zonal_stats(concave_hull, '/data/Geog-c2s2/glim.tif', stats="majority")
+stats = zonal_stats(concave_hull, '/data/Geog-c2s2/glim.tif',
+                    stats="majority", all_touched=True)
 
 toku_id = filename.split('toku_network_')[1][:-4]
 liths[toku_id] = stats[0]['majority']

@@ -6,7 +6,7 @@
 #$ -pe smp 1
 #$ -l node_type=dn
 #$ -l h_vmem=20G
-#$ -l h_rt=3:00:0
+#$ -l h_rt=2:00:0
 #$ -t 1-261
 #$ -tc 100
 
