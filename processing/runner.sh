@@ -29,7 +29,7 @@ rm *.vrt
 # Run the LSD code
 cd /data/home/faw513/LSDTopoTools2/src/lsdtt-drivers/
 
-./strahler-hpc.out /data/Geog-c2s2/toku/$1/ /data/Geog-c2s2/toku/$1/ $1
+./strahler-hpc-basin.out /data/Geog-c2s2/toku/$1/ /data/Geog-c2s2/toku/$1/ $1
 
 # Remove the raster files
 rm /data/Geog-c2s2/toku/$1/$1.bil
