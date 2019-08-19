@@ -4,7 +4,7 @@ import tokunaga_fns as toku
 import numpy as np
 from glob import glob
 
-filename = '../data/TokunagaData_25_44_45dab36e_67d9_4ba0_a243_a73ed6b6ed11_0.csv'
+filename = '../data_3500/TokunagaData_25_44_45dab36e_67d9_4ba0_a243_a73ed6b6ed11_0.csv'
 
 toku_data, strahler_data, _ = toku.read_toku_data(filename)
 
